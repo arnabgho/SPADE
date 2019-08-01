@@ -63,6 +63,11 @@ class Pix2pixDataset(BaseDataset):
         label_tensor = transform_label(label) * 255.0
         label_tensor[label_tensor == 255] = self.opt.label_nc  # 'unknown' is opt.label_nc
 
+        if opt.dataset_mode=='scribble':
+            label = Image.open(label_path)
+            transform_label = get_transform(self.opt,params)
+            label_tensor = transform_label(label)
+
         # input image (real images)
         image_path = self.image_paths[index]
         assert self.paths_match(label_path, image_path), \

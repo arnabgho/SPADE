@@ -63,8 +63,9 @@ class Pix2pixDataset(BaseDataset):
         label_tensor = transform_label(label) * 255.0
         label_tensor[label_tensor == 255] = self.opt.label_nc  # 'unknown' is opt.label_nc
 
-        if opt.dataset_mode=='scribble':
+        if self.opt.dataset_mode=='scribble':
             label = Image.open(label_path)
+            label = label.convert('RGB')
             transform_label = get_transform(self.opt,params)
             label_tensor = transform_label(label)
 

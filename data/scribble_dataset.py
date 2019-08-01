@@ -5,9 +5,9 @@ Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses
 
 from data.pix2pix_dataset import Pix2pixDataset
 from data.image_folder import make_dataset
+import os
 
-
-class CustomDataset(Pix2pixDataset):
+class ScribbleDataset(Pix2pixDataset):
     """ Dataset that loads images from directories
         Use option --label_dir, --image_dir, --instance_dir to specify the directories.
         The images in the directories are sorted in alphabetical order and paired in order.
@@ -40,11 +40,12 @@ class CustomDataset(Pix2pixDataset):
         image_dir = os.path.join(root,'scribbles')
         image_paths = make_dataset(image_dir, recursive=False, read_cache=True)
 
-        if len(opt.instance_dir) > 0:
-            instance_dir = opt.instance_dir
-            instance_paths = make_dataset(instance_dir, recursive=False, read_cache=True)
-        else:
-            instance_paths = []
+        instance_paths = []
+        #if len(opt.instance_dir) > 0:
+        #    instance_dir = opt.instance_dir
+        #    instance_paths = make_dataset(instance_dir, recursive=False, read_cache=True)
+        #else:
+        #    instance_paths = []
 
         assert len(label_paths) == len(image_paths), "The #images in %s and %s do not match. Is there something wrong?"
 

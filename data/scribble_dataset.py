@@ -37,7 +37,7 @@ class ScribbleDataset(Pix2pixDataset):
         label_dir = os.path.join(root,'scribbles')
         label_paths = make_dataset(label_dir, recursive=False, read_cache=True)
 
-        image_dir = os.path.join(root,'scribbles')
+        image_dir = os.path.join(root,'images')
         image_paths = make_dataset(image_dir, recursive=False, read_cache=True)
 
         instance_paths = []

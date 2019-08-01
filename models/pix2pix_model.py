@@ -40,6 +40,8 @@ class Pix2PixModel(torch.nn.Module):
     # routines based on |mode|.
     def forward(self, data, mode):
         input_semantics, real_image = self.preprocess_input(data)
+        if self.opt.dataset_mode == 'scribble':
+            input_semantics, real_image = self.preprocess_input_scribble(data)
 
         if mode == 'generator':
             g_loss, generated = self.compute_generator_loss(
@@ -105,6 +107,13 @@ class Pix2PixModel(torch.nn.Module):
     # preprocess the input, such as moving the tensors to GPUs and
     # transforming the label map to one-hot encoding
     # |data|: dictionary of the input data
+
+    def preprocess_input_scribble(self,data):
+        if self.use_gpu():
+            data['label'] = data['label'].float().cuda()
+            data['instance']=data['instance'].cuda()
+            data['image'] = data['image'].cuda()
+        return data['label'] , data['image']
 
     def preprocess_input(self, data):
         # move to GPU and change data types

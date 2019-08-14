@@ -21,7 +21,7 @@ class ScribbleDataset(Pix2pixDataset):
         parser.set_defaults(load_size=load_size)
         parser.set_defaults(crop_size=256)
         parser.set_defaults(display_winsize=256)
-        parser.set_defaults(label_nc=1)
+        parser.set_defaults(label_nc=3)
         parser.set_defaults(contain_dontcare_label=False)
 
         #parser.add_argument('--label_dir', type=str, required=True,
